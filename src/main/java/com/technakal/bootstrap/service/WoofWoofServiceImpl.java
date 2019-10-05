@@ -5,14 +5,15 @@ import com.technakal.bootstrap.repository.WoofWoofRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.swing.text.html.Option;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class WoofWoofServiceImpl implements WoofWoofService {
 
   @Autowired
   WoofWoofRepository woofWoofRepository;
-
 
   @Override
   public List<WoofWoof> retrieveAllWoofWoofs() {
@@ -31,6 +32,8 @@ public class WoofWoofServiceImpl implements WoofWoofService {
 
   @Override
   public String retrieveBreedById(Long id) {
-    return woofWoofRepository.findBreedById(id);
+    // handle invalid ID error
+    Optional<String> optionalBreed = Optional.ofNullable(woofWoofRepository.findBreedById(id));
+    return optionalBreed.orElseThrow(DogNotFoundException::new);
   }
 }
