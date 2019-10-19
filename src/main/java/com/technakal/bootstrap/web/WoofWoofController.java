@@ -27,7 +27,7 @@ public class WoofWoofController {
     this.woofWoofService = service;
   }
 
-  @GetMapping("/api/all")
+  @GetMapping("/api")
   public ResponseEntity<List<WoofWoof>> getAllWoofWoofs() {
     List<WoofWoof> list = woofWoofService.retrieveAllWoofWoofs();
     return new ResponseEntity<>(list, HttpStatus.OK);
